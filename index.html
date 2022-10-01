@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+</head>
+<body>
+<main class="todo-section">
+    <h1>todos</h1>
+    <section class="todo-main">
+        <header class="todo-header">
+            <button class="hiding-button"></button>
+            <input type="text" placeholder="What needs to be done?" name="main-input">
+        </header>
+        <ul class="todo-list">
+            <li class="todo-task">
+                <input type="checkbox" class="done-checkbox">
+                <input type="text" value="HTML" class="task-text">
+                <button class="delete-button"></button>
+            </li>
+            <li class="todo-task">
+                <input type="checkbox" class="done-checkbox">
+                <input type="text" value="CSS" class="task-text">
+                <button class="delete-button"></button>
+            </li>
+            <li class="todo-task">
+                <input type="checkbox" class="done-checkbox">
+                <input type="text" value="JS" class="task-text">
+                <button class="delete-button"></button>
+            </li>
+            <li class="todo-task">
+                <input type="checkbox" class="done-checkbox">
+                <input type="text" value="JS tools" class="task-text">
+                <button class="delete-button"></button>
+            </li>
+        </ul>
+        <footer class="todo-footer">
+            <span class="unselected-tasks-count">3 items left</span>
+            <span class="selector">
+                <input type="radio" name="switcher" value="All" id="all-switcher">
+                <label for="all-switcher">All</label>
+                <input type="radio" name="switcher" value="Active" id="active-switcher">
+                <label for="active-switcher">Active</label>
+                <input type="radio" name="switcher" value="Completed" id="completed-switcher">
+                <label for="completed-switcher">Completed</label>
+            </span>
+            <button class="clear-button">Clear completed</button>
+        </footer>
+    </section>
+</main>
+</body>
+</html>
