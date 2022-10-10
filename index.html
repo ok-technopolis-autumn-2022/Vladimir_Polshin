@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+</head>
+<body>
+<main class="todo-section">
+    <h1>todos</h1>
+    <section class="todo-main">
+        <header class="todo-header">
+            <button class="select-all-button" title="Select all tasks"></button>
+            <input type="text" placeholder="What needs to be done?" name="main-input" aria-label="Add task to do">
+        </header>
+        <ul class="todo-list" aria-label="To-do list of tasks">
+            <li class="todo-task" role="listitem">
+                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
+                <input type="text" value="HTML" class="task-text" aria-label="Edit the task">
+                <button class="delete-button" title="Delete the task"></button>
+            </li>
+            <li class="todo-task" role="listitem">
+                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
+                <input type="text" value="CSS" class="task-text" aria-label="Edit the task">
+                <button class="delete-button " title="Delete the task"></button>
+            </li>
+            <li class="todo-task" role="listitem">
+                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
+                <input type="text" value="JS" class="task-text" aria-label="Edit the task">
+                <button class="delete-button" title="Delete the task"></button>
+            </li>
+            <li class="todo-task" role="listitem">
+                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
+                <input type="text" value="JS tools" class="task-text" aria-label="Edit the task">
+                <button class="delete-button" title="Delete the task"></button>
+            </li>
+        </ul>
+        <footer class="todo-footer">
+            <span class="unselected-tasks-count">3 items left</span>
+            <span class="selector" role="radiogroup" aria-label="Select a filter">
+                <input type="radio" name="switcher" value="All" id="all-switcher">
+                <label for="all-switcher">All</label>
+                <input type="radio" name="switcher" value="Active" id="active-switcher">
+                <label for="active-switcher">Active</label>
+                <input type="radio" name="switcher" value="Completed" id="completed-switcher">
+                <label for="completed-switcher">Completed</label>
+            </span>
+            <button class="clear-button">Clear completed</button>
+        </footer>
+    </section>
+</main>
+</body>
+</html>
