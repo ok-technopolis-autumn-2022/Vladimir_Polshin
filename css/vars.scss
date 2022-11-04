@@ -1,0 +1,45 @@
+//colors
+$color_invisible: transparent;
+$color_white: #fff;
+$color_gray_98: #fafafa;
+$color_gray_90: #e5e5e5;
+$color_gray_whitesmoke: #f5f5f5;
+$color_gray_light: #e6e6e6;
+$color_gray_light_red: #ebdfdf;
+$color_gray_silver: #ccc;
+$color_gray: #888;
+$color_gray_dark: #666;
+$color_hygiene_green: #60c2b1;
+
+$color_bg: #f2f2f2;
+$color_divider: $color_gray_light;
+
+$color_primary_text: $color_gray_dark;
+$color_secondary_text: $color_gray;
+$color_placeholder_text: $color_gray_silver;
+$color_title_text: $color_gray_silver;
+
+$color_filter_checked: $color_gray_light_red;
+$color_checkbox_checked: $color_hygiene_green;
+$color_hover: $color_gray_98;
+
+//font
+$font_family: "Roboto", sans-serif;
+
+$font_small_14: 14px;
+$font_normal_24: 24px;
+$font_large_100: 100px;
+
+//spacings
+$spacing_shadow_height_5: 5px;
+$spacing_shadow_height_10: $spacing_shadow_height_5 * 2;
+
+$spacing_small_2: 2px;
+$spacing_normal_4: 4px;
+$spacing_large_12: 12px;
+
+//shadow
+$box_shadow_before-after: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+//border
+$border_type: 1px solid;
