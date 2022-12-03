@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>todos</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i&amp;display=swap&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i&amp;display=swap&amp;subset=cyrillic"
+          rel="stylesheet">
     <link rel="stylesheet" href="css/styles.scss">
+    <script src="js/index.js" type="module" defer></script>
 </head>
 <body>
 <main class="todo-section">
@@ -12,34 +14,13 @@
     <section class="todo-main">
         <header class="todo-header">
             <button class="select-all-button" title="Select all tasks"></button>
-            <input type="text" placeholder="What needs to be done?" class="main-input" aria-label="Add task to do">
+            <form action="#" method="post" class="main-form">
+                <input type="text" placeholder="What needs to be done?" class="main-input" aria-label="Add task to do">
+            </form>
         </header>
-        <ul class="todo-list" aria-label="To-do list of tasks">
-            <li class="todo-task" role="listitem">
-                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
-                <input type="text" value="HTML" class="task-text" aria-label="Edit the task">
-                <button class="delete-button" title="Delete the task"></button>
-            </li>
-            <li class="todo-task" role="listitem">
-                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
-                <input type="text" value="CSS" class="task-text" aria-label="Edit the task">
-                <button class="delete-button " title="Delete the task"></button>
-            </li>
-            <li class="todo-task" role="listitem">
-                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
-                <input type="text" value="JS" class="task-text" aria-label="Edit the task">
-                <button class="delete-button" title="Delete the task"></button>
-            </li>
-            <li class="todo-task" role="listitem">
-                <input type="checkbox" class="done-checkbox" aria-label="Complete the task">
-                <input type="text" value="JS tools" class="task-text" aria-label="Edit the task">
-                <button class="delete-button" title="Delete the task"></button>
-            </li>
-            <li class="todo-task" role="listitem">
-            </li>
-        </ul>
+        <ul class="todo-list" aria-label="To-do list of tasks"></ul>
         <footer class="todo-footer">
-            <span class="unselected-tasks-count">3 items left</span>
+            <span class="unselected-tasks-count">0 items left</span>
             <span class="selector" role="radiogroup" aria-label="Select a filter">
                 <input type="radio" name="switcher" value="All" id="all-switcher">
                 <label for="all-switcher">All</label>

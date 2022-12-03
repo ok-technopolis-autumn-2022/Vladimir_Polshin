@@ -99,6 +99,7 @@ body {
 
 .todo-list {
   max-height: 402px;
+  height: 300px;
   overflow-y: auto;
 }
 
@@ -150,6 +151,11 @@ body {
   background-position: center;
   background-size: 20px;
   border: $border_type $color_hygiene_green;
+}
+
+.todo-task input[type=checkbox]:checked + .task-text {
+  color: $color_gray_light;
+  text-decoration: line-through 2px;
 }
 
 .delete-button {
@@ -213,5 +219,12 @@ ul {
 .clear-button {
   background-color: $color_white;
   color: $color_secondary_text;
+  border: 0;
+}
+
+form {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
   border: 0;
 }
