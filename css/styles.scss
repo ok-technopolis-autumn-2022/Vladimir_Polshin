@@ -99,7 +99,7 @@ body {
 
 .todo-list {
   max-height: 402px;
-  height: 300px;
+  min-height: 300px;
   overflow-y: auto;
 }
 
@@ -198,7 +198,7 @@ ul {
 
 .selector input[type=radio] {
   opacity: 0.01;
-  visablity: hidden;
+  visibility: hidden;
 }
 
 .selector label {

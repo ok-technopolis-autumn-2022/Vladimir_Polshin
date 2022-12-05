@@ -12,8 +12,6 @@ const activeTasksButton = document.getElementById('active-switcher');
 const completedTasksButton = document.getElementById('completed-switcher');
 const clearButton = document.querySelector('.clear-button');
 
-allTasksButton.checked = true;
-
 function addTask(e) {
     e.preventDefault();
     const currTask = {
@@ -26,7 +24,7 @@ function addTask(e) {
     this.reset();
     const task = createLi(currTask);
     todoList.append(task);
-    refreshCount();
+    showTasks();
 }
 
 function showTasks() {
@@ -58,10 +56,9 @@ function refreshCount() {
 function selectAll() {
     todoList.childNodes.forEach(task => {
         const checkbox = task.querySelector('.done-checkbox')
-        const description = task.querySelector('.task-text').value;
         if (!store.isCompleted(task)) {
             checkbox.checked = true;
-            store.changeTask(task, checkbox.checked, description);
+            store.changeTask(task, checkbox.checked);
         }
     });
     showTasks();
@@ -81,7 +78,7 @@ function manipulateTask(e) {
         task.remove();
         store.remove(task.id);
     } else if (target.className === 'done-checkbox') {
-        store.changeTask(task, checkbox.checked, description);
+        store.changeTask(task, checkbox.checked);
     } else if (target.className === 'task-text') {
         store.changeTask(task, checkbox.checked, description);
         return;
