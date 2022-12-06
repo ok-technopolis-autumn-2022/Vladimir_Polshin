@@ -112,6 +112,7 @@ body {
 
 .task-text {
   color: $color_primary_text;
+  background-color: inherit;
   display: block;
   cursor: pointer;
   flex-grow: 1;
@@ -160,6 +161,7 @@ body {
 
 .delete-button {
   background-image: url(../images/close.svg);
+  background-color: inherit;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
@@ -167,7 +169,6 @@ body {
   height: 36px;
   border: 0;
   opacity: 0;
-  background-color: $color_white;
 }
 
 .delete-button:focus {

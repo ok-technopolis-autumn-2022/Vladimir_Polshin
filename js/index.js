@@ -74,16 +74,24 @@ function manipulateTask(e) {
     const task = target.parentNode;
     const checkbox = task.querySelector('.done-checkbox');
     const description = task.querySelector('.task-text').value;
-    if (target.className === 'delete-button') {
-        task.remove();
-        store.remove(task.id);
-    } else if (target.className === 'done-checkbox') {
-        store.changeTask(task, checkbox.checked);
-    } else if (target.className === 'task-text') {
-        store.changeTask(task, checkbox.checked, description);
-        return;
+    let needShow = false;
+    switch (target.className) {
+        case 'done-checkbox':
+            store.changeTask(task, checkbox.checked);
+            needShow = true;
+            break;
+        case 'delete-button':
+            task.remove();
+            store.remove(task.id);
+            needShow = true;
+            break;
+        case 'task-text':
+            store.changeTask(task, checkbox.checked, description);
     }
-    showTasks();
+
+    if (needShow) {
+        showTasks();
+    }
 }
 
 allTasksButton.addEventListener('click', showTasks);
