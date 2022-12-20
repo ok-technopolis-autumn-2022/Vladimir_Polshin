@@ -2,6 +2,7 @@
 import {count} from "./counter";
 import createLi from "./todo-task/task";
 import store from "./todo-store/store";
+import events from "./todo-store/events";
 
 const selectAllButton = document.querySelector('.select-all-button');
 const mainForm = document.querySelector('.main-form');
@@ -20,77 +21,72 @@ function addTask(e) {
         isCompleted: false
     };
     store.add(currTask);
-
-    this.reset();
-    const task = createLi(currTask);
-    todoList.append(task);
-    showTasks();
 }
 
-function showTasks() {
-    todoList.innerHTML = '';
-    const tasks = store.getAll();
-    tasks.forEach(task => {
-        const taskLi = createLi(task);
-        if (allTasksButton.checked) {
-            todoList.append(taskLi);
-        } else if (activeTasksButton.checked && !store.isCompleted(task)) {
-            todoList.append(taskLi);
-        } else if (completedTasksButton.checked && store.isCompleted(task)) {
-            todoList.append(taskLi);
-        }
-    });
-    refreshCount();
-}
-
-function refreshCount() {
-    let counter = 0;
-    todoList.childNodes.forEach(task => {
-        if (!store.isCompleted(task)) {
-            counter++;
-        }
-    })
-    unselectedTasksCount.textContent = counter.toString() + ' items left';
-}
-
-function selectAll() {
-    todoList.childNodes.forEach(task => {
-        const checkbox = task.querySelector('.done-checkbox')
-        if (!store.isCompleted(task)) {
-            checkbox.checked = true;
-            store.changeTask(task, checkbox.checked);
-        }
-    });
-    showTasks();
-}
-
-function clearCompleted() {
-    store.clearCompleted();
-    showTasks();
-}
-
-function manipulateTask(e) {
+function changeTask(e) {
     const target = e.target;
     const task = target.parentNode;
     const checkbox = task.querySelector('.done-checkbox');
     const description = task.querySelector('.task-text').value;
-    if (target.className === 'delete-button') {
-        task.remove();
-        store.remove(task.id);
-    } else if (target.className === 'done-checkbox') {
-        store.changeTask(task, checkbox.checked);
-    } else if (target.className === 'task-text') {
-        store.changeTask(task, checkbox.checked, description);
-        return;
+    switch (target.className) {
+        case 'done-checkbox':
+            store.change(task, checkbox.checked);
+            break;
+        case 'task-text':
+            store.change(task, checkbox.checked, description);
+            break;
+        case 'delete-button':
+            store.remove(task.id);
     }
-    showTasks();
 }
 
-allTasksButton.addEventListener('click', showTasks);
+function selectAllTasks() {
+    store.selectAll();
+}
+
+function clearCompletedTasks() {
+    store.removeCompleted();
+}
+
+function rerenderTasks() {
+    todoList.innerHTML = '';
+    const tasks = store.getAll();
+    tasks.forEach(task => {
+        const taskLi = createLi(task);
+        if (allTasksButton.checked || activeTasksButton.checked && !store.isCompleted(task)
+            || completedTasksButton.checked && store.isCompleted(task)) {
+            todoList.append(taskLi);
+        }
+    });
+}
+
+function refreshCounter() {
+    let counter = 0;
+    store.getAll().forEach(task => {
+        if (!store.isCompleted(task)) {
+            counter++;
+        }
+    });
+    unselectedTasksCount.textContent = counter.toString() + ' items left';
+}
+
+allTasksButton.addEventListener('click', rerenderTasks);
 mainForm.addEventListener('submit', addTask);
-todoList.addEventListener('click', manipulateTask);
-todoList.addEventListener('input', manipulateTask);
-activeTasksButton.addEventListener('click', showTasks);
-completedTasksButton.addEventListener('click', showTasks);
-selectAllButton.addEventListener('click', selectAll);
-clearButton.addEventListener('click', clearCompleted);
+todoList.addEventListener('click', changeTask);
+todoList.addEventListener('input', changeTask);
+activeTasksButton.addEventListener('click', rerenderTasks);
+completedTasksButton.addEventListener('click', rerenderTasks);
+selectAllButton.addEventListener('click', selectAllTasks);
+clearButton.addEventListener('click', clearCompletedTasks);
+
+store.subscribe((event) => {
+    switch (event) {
+        case events.TASK_ADDED:
+            document.querySelector('.main-input').value = '';
+        case events.TASK_REMOVED:
+        case events.TASK_CHANGED:
+            rerenderTasks();
+        case events.REFRESHED_COUNTER:
+            refreshCounter();
+    }
+});

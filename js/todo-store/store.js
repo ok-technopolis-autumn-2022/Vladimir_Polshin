@@ -1,40 +1,53 @@
 'use strict'
+import events from "./events";
 
 class Store {
-    _tasks = [];
+    #tasks = [];
+    #observers = [];
 
     constructor(tasks) {
         if (Array.isArray(tasks)) {
-            this._tasks = this._tasks.concat(tasks);
+            this.#tasks = this.#tasks.concat(tasks);
         }
     }
 
+    subscribe(observer) {
+        this.#observers.push(observer);
+        observer(this);
+    }
+
+    notify(event) {
+        this.#observers.forEach(currObserver => currObserver(event));
+    }
+
     add(task) {
-        this._tasks.push(task);
+        this.#tasks.push(task);
+        this.notify(events.TASK_ADDED);
     }
 
-    getAll() {
-        return this._tasks;
-    }
-
-    remove(id) {
-        this._tasks = this._tasks.filter(task => task.id !== Number(id))
-    }
-
-    changeTask(task, isCompleted, description) {
+    change(task, isCompleted, description) {
         const currTask = this.#getById(task.id);
         if (!currTask) {
             return;
         }
 
         currTask.isCompleted = isCompleted;
-        if (description) {
-            currTask.description = description;
+        if (!description) {
+            this.notify(events.TASK_CHANGED);
+            return;
         }
+        currTask.description = description;
+        this.notify(events.REFRESHED_COUNTER);
     }
 
-    clearCompleted() {
-        this._tasks = this._tasks.filter((task) => !task.isCompleted);
+    remove(id) {
+        this.#tasks = this.#tasks.filter(task => task.id !== Number(id));
+        this.notify(events.TASK_REMOVED);
+    }
+
+    removeCompleted() {
+        this.#tasks = this.#tasks.filter((task) => !task.isCompleted);
+        this.notify(events.TASK_REMOVED);
     }
 
     isCompleted(task) {
@@ -44,8 +57,17 @@ class Store {
         }
     }
 
+    selectAll() {
+        this.#tasks.forEach(task => task.isCompleted = true);
+        this.notify(events.TASK_CHANGED);
+    }
+
+    getAll() {
+        return this.#tasks;
+    }
+
     #getById(id) {
-        return this._tasks.find(task => task.id === Number(id));
+        return this.#tasks.find(task => task.id === Number(id));
     }
 }
 
